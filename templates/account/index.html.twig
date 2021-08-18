@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Account!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row user-menu-container square">
+            <div class="col-md-12 user-details">
+                <div class="row spacepurplebg white">
+                    <div class="col-md-2 no-pad">
+                        <div class="user-image">
+                            <img src="#" class="img-responsive thumbnail">
+                        </div>
+                    </div>
+                    <div class="col-md-10 no-pad">
+                        <div class="user-pad">
+                            <h3>Welcome back, {{ app.user.username }}</h3>
+                            <h4 class="white"><i class="fa fa-twitter"></i> {{ app.user.email }}</h4>
+                            <a class="btn btn-labeled btn-info" href="#">
+                                <span class="btn-label"><i class="fa fa-pencil"></i></span>Update
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row overview">
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>WORKSHOP REGISTERED</h3>
+                        <h4>184</h4>
+                    </div>
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>WORKSHOP ATTENDED</h3>
+                        <h4>129</h4>
+                    </div>
+                    <div class="col-md-4 user-pad text-center">
+                        <h3>LIKES</h3>
+                        <h4>3,892</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

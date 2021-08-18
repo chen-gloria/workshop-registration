@@ -28,6 +28,7 @@ class AdminFixture extends BaseFixture
                 $admin,
                 'lesmills'
             ));
+            // $admin->setPassword('lesmills');
 
             return $admin;
         });

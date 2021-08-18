@@ -7,6 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+
 class InstructorFixture extends BaseFixture
 {
     private $passwordHasher;
@@ -27,6 +28,7 @@ class InstructorFixture extends BaseFixture
                 $instructor,
                 'lesmills'
             ));
+            // $instructor->setPassword('lesmills');
 
             return $instructor;
         });

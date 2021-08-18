@@ -31,9 +31,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
 
     public function getId(): ?int
     {
@@ -88,29 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * This method can be removed in Symfony 6.0 - is not needed for apps that do not check user passwords.
-     *
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): ?string
-    {
-        return null;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
     
-    /**
-     * This method can be removed in Symfony 6.0 - is not needed for apps that do not check user passwords.
-     *
-     * @see UserInterface
-     */
     public function getSalt(): ?string
     {
         return null;
@@ -130,5 +113,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
     }
 }
