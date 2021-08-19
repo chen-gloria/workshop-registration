@@ -86,6 +86,9 @@ div.user-menu-container .thumbnail {
     width: 200px;
 }
 
+.charts-img{
+    /* width: 350px; */
+}
 /* -- media query for user profile image -- */
 @media (max-width: 767px) {
     .user-image {
