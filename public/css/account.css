@@ -82,6 +82,10 @@ div.user-menu-container .thumbnail {
     border-radius: 0px!important;
 }
 
+.programs-img {
+    width: 200px;
+}
+
 /* -- media query for user profile image -- */
 @media (max-width: 767px) {
     .user-image {
