@@ -20,8 +20,16 @@
                     </div>
                     <div class="col-md-10 no-pad">
                         <div class="user-pad">
-                            <h3>Welcome back, {{ app.user.username }}</h3>
-                            <h4 class="white"><i class="fa fa-twitter"></i> {{ app.user.email }}</h4>
+                            <h3>Welcome back, 
+                                {% if app.user.email is defined %}
+                                    {{ app.user.email }}
+                                {% else %} 
+                                    please go to verify your email.
+                                {% endif %}
+                            </h3>
+                            {% if app.user.email is defined %}
+                                <h4 class="white"><i class="fa fa-twitter"></i> {{ app.user.email }}</h4>
+                            {% endif %}
                             <a class="btn btn-labeled btn-info" href="#">
                                 <span class="btn-label"><i class="fa fa-pencil"></i></span>Update
                             </a>
