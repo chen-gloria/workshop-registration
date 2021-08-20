@@ -42,6 +42,12 @@ class Workshop
      */
     private $capacity;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="workshops")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $program;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +109,18 @@ class Workshop
     public function setCapacity(?int $capacity): self
     {
         $this->capacity = $capacity;
+
+        return $this;
+    }
+
+    public function getProgram(): ?Program
+    {
+        return $this->program;
+    }
+
+    public function setProgram(?Program $program): self
+    {
+        $this->program = $program;
 
         return $this;
     }
