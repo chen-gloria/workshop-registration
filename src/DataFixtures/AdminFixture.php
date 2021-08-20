@@ -24,12 +24,13 @@ class AdminFixture extends BaseFixture
             $admin->setEmail(sprintf('admin%d@lesmills.com.au', $i));
             $admin->setUsername($this->faker->userName);
             $admin->setRoles(['ROLE_ADMIN']);
+            $admin->agreeTerms();
+            
             $admin->setPassword($this->passwordHasher->hashPassword(
                 $admin,
                 'lesmills'
             ));
             // $admin->setPassword('lesmills');
-
             return $admin;
         });
 

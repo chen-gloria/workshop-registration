@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isVerified = false;
 
@@ -53,6 +53,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToMany(targetEntity=Program::class, mappedBy="instructor")
      */
     private $programs;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $agreeTermsAt;
 
     public function __construct()
     {
@@ -185,4 +190,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getAgreeTermsAt(): ?\DateTimeInterface
+    {
+        return $this->agreeTermsAt;
+    }
+
+    public function setAgreeTermsAt(?\DateTimeInterface $agreeTermsAt): self
+    {
+        $this->agreeTermsAt = $agreeTermsAt;
+
+        return $this;
+    }
+
+    public function agreeTerms()
+    {
+        $this->agreeTermsAt = new \DateTime();
+    }
+
 }

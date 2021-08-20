@@ -24,6 +24,8 @@ class InstructorFixture extends BaseFixture
             $instructor = new User();
             $instructor->setEmail(sprintf('instructor%d@lesmills.com.au', $i));
             $instructor->setUsername($this->faker->userName);
+            $instructor->agreeTerms();
+
             $instructor->setPassword($this->passwordHasher->hashPassword(
                 $instructor,
                 'lesmills'

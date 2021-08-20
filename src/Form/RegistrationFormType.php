@@ -21,8 +21,8 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('agreeTerms', CheckboxType::class)
             ->add('plainPassword', PasswordType::class)
+            ->add('agreeTerms', CheckboxType::class)
         ;
     }
 
