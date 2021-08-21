@@ -31,7 +31,7 @@ class Program
 
     /**
      * @ORM\OneToMany(targetEntity=Workshop::class, mappedBy="program", fetch="EXTRA_LAZY")
-     * @ORM\OrderBy({"createdAt" = "DESC"})
+     * @ORM\OrderBy({"startsAt" = "ASC"})
      */
     private $workshops;
 

@@ -5,15 +5,19 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\WorkshopRepository;
 class WorkshopController extends AbstractController
 {
     /**
      * @Route("/", name="app_homepage")
      */
-    public function homepage()
+    public function homepage(WorkshopRepository $workshopRepository)
     {
-        // TODO: Add another homepage
-        return $this->render('workshop/list.html.twig');
+        $workshops = $workshopRepository->findAll();
+        
+        return $this->render('workshop/list.html.twig', [
+            'workshops' => $workshops,
+        ]);
     }
 
     /**

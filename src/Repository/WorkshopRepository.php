@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Workshop;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,9 +20,33 @@ class WorkshopRepository extends ServiceEntityRepository
         parent::__construct($registry, Workshop::class);
     }
 
-    // /**
-    //  * @return Workshop[] Returns an array of Workshop objects
-    //  */
+    /**
+     * @return Workshop[] Returns an array of Workshop objects
+     */
+
+    public function findAllOrderedByNewest()
+    {
+        return $this->addIsSetDateQueryBuilder()
+            ->orderBy('w.startsAt', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    private function addIsSetDateQueryBuilder(QueryBuilder $qb = null)
+    {
+        return $this->getOrCreateQueryBuilder($qb)
+            ->andWhere('w.startsAt IS NOT NULL');
+    }
+
+    private function getOrCreateQueryBuilder(QueryBuilder $qb = null)
+    {
+        return $qb ?: $this->createQueryBuilder('w');
+    }
+
+    /**
+     * @return Workshop[] Returns an array of Workshop objects
+     */
     /*
     public function findByExampleField($value)
     {

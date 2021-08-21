@@ -11,10 +11,10 @@ class WorkshopFixture extends BaseFixture implements DependentFixtureInterface
 {
     public function loadData(ObjectManager $manager)
     {
-        $this->createMany(50, 'workshops', function($count) use ($manager) {
+        $this->createMany(30, 'workshops', function($count) use ($manager) {
             $workshop = new Workshop();
-            $workshop->setName($this->faker->name);
-            $workshop->setLocation($this->faker->address);
+            $workshop->setName($this->faker->realText($maxNbChars = 25));
+            $workshop->setLocation($this->faker->streetName);
             $workshop->setStartsAt($this->faker->dateTimeBetween('now', '+3 months'));
             $workshop->setEndsAt($this->faker->dateTimeBetween($workshop->getStartsAt(), '+3 months'));
             $workshop->setCapacity($this->faker->numberBetween(10, 100));
