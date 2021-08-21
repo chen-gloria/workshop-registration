@@ -17,20 +17,19 @@ class InstructorFixture extends BaseFixture
         $this->passwordHasher = $passwordHasher;
     }
 
-    // Load Instructors Data
     public function loadData(ObjectManager $manager)
     {
         $this->createMany(10, 'instructors', function($i) {
             $instructor = new User();
             $instructor->setEmail(sprintf('instructor%d@lesmills.com.au', $i));
             $instructor->setUsername($this->faker->userName);
+            $instructor->setRoles(['ROLE_INSTRUCTOR']);
             $instructor->agreeTerms();
 
             $instructor->setPassword($this->passwordHasher->hashPassword(
                 $instructor,
                 'lesmills'
             ));
-            // $instructor->setPassword('lesmills');
 
             return $instructor;
         });
