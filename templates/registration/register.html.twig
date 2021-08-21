@@ -1,21 +1,56 @@
 {% extends 'base.html.twig' %}
+{% form_theme registrationForm _self %}
 
 {% block title %}Register as a new instructor!{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
+
+{%- block form_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+
+    {{- form_label(form, null, {
+        label_attr: { class: 'sr-only' }
+    }) -}}
+    {{- form_errors(form) -}}
+    {{- form_widget(form, widget_attr) -}}
+    {{- form_help(form) -}}
+{%- endblock form_row -%}
+
+{% block _registration_form_agreeTerms_row %}
+    <div class="checkbox mb-3">
+        {{ form_errors(form) }}
+        <label>
+            <input type="checkbox" name="{{ full_name }}" required> Agree to terms I for sure read
+        </label>
+    </div>
+{% endblock %}
+
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
 
-    <h1>Register</h1>
+    {{ form_start(registrationForm, {
+        attr: { class : 'form-signin' }
+    }) }}
+    
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.email, {
+            attr: { placeholder: 'Email' }
+        }) }}
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+            attr: { placeholder: 'Password' }
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">
+            Register
+        </button>
     {{ form_end(registrationForm) }}
+    
 {% endblock %}
