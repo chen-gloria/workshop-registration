@@ -60,7 +60,15 @@
                             </span>
                             <span>
                                 <span class="account-user-name">Dominic Keller</span>
-                                <span class="account-position">Instructor</span>
+                                <span class="account-position">
+                                {% if app.user.roles is defined %}
+                                    {% for role in app.user.roles %}
+                                        {{ role }}
+                                    {% endfor %}
+                                {% else %}
+                                    <strong> Not verified </strong>
+                                {% endif %}
+                                </span>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop" style="">
@@ -113,7 +121,7 @@
                         <a style="color: #fff;" class="nav-link" href="{{ path('instructor_login') }}">Instructor Login</a>
                     </li>
                     <li class="nav-item notification-list d-none d-lg-block topbar-dropdown">
-                        <a style="color: #fff;" class="nav-link" href="{{ path('instructor_register') }}">Register</a>
+                        <a style="color: #fff;" class="nav-link" href="{{ path('instructor_register') }}">Instructor Register </a>
                     </li>
                 </ul>
                 {% endblock %}

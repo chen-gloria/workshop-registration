@@ -44,6 +44,7 @@ class RegistrationController extends AbstractController
                     $userModel->plainPassword
                 )
             );
+            $user->setRoles(['ROLE_INSTRUCTOR']);
 
             if (true === $userModel->agreeTerms) {
                 $user->agreeTerms();

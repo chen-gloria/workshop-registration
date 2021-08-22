@@ -58,7 +58,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     {
         if ($request->getRequestUri() === '/admin/login') {
             return $this->urlGenerator->generate(self::ADMIN_LOGIN_ROUTE);
-        } else if ($request->getRequestUri() === '/instructor/login')
+        } else {
             return $this->urlGenerator->generate(self::INSTRUCTOR_LOGIN_ROUTE);
+        }
     }
 }
