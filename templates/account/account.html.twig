@@ -1,90 +1,86 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Manage Account!{% endblock %}
+{% block content_block %}
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="#">Hyper</a></li>
+                        <li class="breadcrumb-item"><a href="#">Workshops</a></li>
+                        <li class="breadcrumb-item active">Workshop List</li>
+                    </ol>
+                </div> 
+                <h4 class="page-title"> Workshops </h4>
+            </div>
+        </div>
+    </div>
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
-{% endblock %}
-
-{% block body %}
-    <div class="container">
-        <div class="row user-menu-container square">
-            <div class="col-md-12 user-details">
-                <div class="row spacepurplebg white">
-                    <div class="col-md-2 no-pad">
-                        <div class="user-image">
-                            <img src="#" class="img-responsive thumbnail">
-                        </div>
-                    </div>
-                    <div class="col-md-10 no-pad">
-                        <div class="user-pad">
-                            <h3>Welcome back, 
-                                {% if app.user.username %}
-                                    {{ app.user.username }}
-                                {% else %} 
-                                    please go to verify your email.
-                                {% endif %}
-                            </h3>
-                            {% if app.user.email is defined %}
-                                <h4 class="white"><i class="fa fa-twitter"></i> {{ app.user.email }}</h4>
-                            {% endif %}
-                            <a class="btn btn-labeled btn-info" href="#">
-                                <span class="btn-label"><i class="fa fa-pencil"></i></span>Update
-                            </a>
-                        </div>
-                    </div>
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <div class="text-sm-end">
+                <div class="btn-group mb-3">
+                    <button type="button" class="btn btn-primary">All</button>
                 </div>
-
-                <div class="row overview">
-                    <h3 class="col-md-3 user-pad"> My Programs: </h3>
+                <div class="btn-group mb-3 ms-1">
+                    <button type="button" class="btn btn-light">Ongoing</button>
+                    <button type="button" class="btn btn-light">Finished</button>
                 </div>
-                <div class="row overview">
-                    <div class="col-md-3 user-pad text-center">
-                        <img class="programs-img" src="{{ asset('images/programs/BODYATTACK.png') }}">
-                    </div>
-                    <div class="col-md-3 user-pad text-center">
-                        <img class="programs-img" src="{{ asset('images/programs/BODYBALANCE.png') }}">
-                    </div>
-                    <div class="col-md-3 user-pad text-center">
-                        <img class="programs-img" src="{{ asset('images/programs/BODYCOMBAT.png') }}">
-                    </div>
+                <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
+                    <button type="button" class="btn btn-secondary"><i class="dripicons-view-apps"></i></button>
                 </div>
-
-                <hr>
-
-                <div class="row overview">
-                    <h3 class="col-md-3 user-pad"> My Workshops: </h3>
+                <div class="btn-group mb-3 d-none d-sm-inline-block">
+                    <button type="button" class="btn btn-link text-muted"><i class="dripicons-checklist"></i></button>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="row overview">
-                    <div class="col-md-3 user-pad text-center">
-                        <h3>WORKSHOP REGISTERED</h3>
-                        <h4>184</h4>
-                    </div>
-                    <div class="col-md-3 user-pad text-center">
-                        <h3>WORKSHOP ATTENDED</h3>
-                        <h4>129</h4>
-                    </div>
-                    <div class="col-md-3 user-pad text-center">
-                        <h3>LIKES</h3>
-                        <h4>3,892</h4>
-                    </div>
-                </div>
-
-                <div class="row overview">
-                    <div class="col-md-3 user-pad text-center">
-                        <img class="charts-img" src="{{ asset('images/charts/chart3.png') }}" style="width: 250px;">
-                    </div>
-                    <div class="col-md-3 user-pad text-center">
-                        <img class="charts-img" src="{{ asset('images/charts/chart4.png') }}" style="width: 350px;">
-                    </div>
-                    <div class="col-md-3 user-pad text-center">
-                        <img class="charts-img" src="{{ asset('images/charts/chart1.png') }}" style="margin-left: 150px; width: 220px;">
+    <div class="row">
+        {% for workshop in workshops %}
+        <div class="col-lg-6 col-xxl-3">
+            <div class="card d-block">
+                <div class="card-body">
+                    <h4 class="mt-0"> <a href="#" class="text-title">{{ workshop.name }}</a></h4>
+                    <div class="badge bg-success mb-3">Finished</div>
+                    <p class="text-muted font-13 mb-3">
+                        With supporting text below as a natural lead-in to additional contenposuere erat a ante...<a href="#" class="fw-bold text-muted">view more</a>
+                    </p>
+                    <p class="mb-1">
+                        <span class="text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            {{ workshop.capacity }}
+                        </span>
+                        <br>
+                        <span class="text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            {{ workshop.location }}
+                        </span>
+                        <br>
+                        <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-format-list-bulleted-type text-muted"></i>
+                            {{ workshop.startsAt|date('Y-m-d H:i') }}
+                        </span>
+                        <br>
+                        <span class="text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            {{ workshop.endsAt|date('Y-m-d H:i') }}
+                        </span>
+                    </p>
+                    <div id="tooltip-container">
+                        <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
+                            <img src="{{ asset('images/profile/alien.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                        </a>
+                        <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
+                            <img src="{{ asset('images/profile/astronaut.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                        </a>
+                        <a href="#" class="d-inline-block text-muted fw-bold ms-2">
+                            +7 more
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 {% endblock %}

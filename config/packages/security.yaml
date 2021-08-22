@@ -30,7 +30,7 @@ security:
             
             # redirect anonymous users to the login page
             entry_point: App\Security\LoginFormAuthenticator
-            
+
             logout:
                 path: app_logout
 
@@ -46,6 +46,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
-        - { path: ^/instructor/login, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/instructor/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/workshop, roles: ROLE_ADMIN }
