@@ -124,4 +124,9 @@ class Workshop
 
         return $this;
     }
+
+    public function getProgramImageFilename()
+    {
+        return 'images/programs/'.$this->program->getImageFilename();
+    }
 }
