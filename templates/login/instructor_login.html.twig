@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block body %}
+    {% block language_profile %}
+    {% endblock %}
+    
     <form class="form-signin" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

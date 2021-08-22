@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block login_register %}
+{% endblock %}
+
 {% block content_block %}
     <div class="row">
         <div class="col-12">
@@ -37,6 +40,8 @@
     </div>
 
     <div class="row">
+    {# {% if app.user.username %} #}
+    {% if app.user.email is defined %}
         {% for workshop in workshops %}
         <div class="col-lg-6 col-xxl-3">
             <div class="card d-block">
@@ -82,5 +87,13 @@
             </div>
         </div>
         {% endfor %}
+    {% else %}
+        <div class="container">
+            <div class="col-lg-12 col-xxl-12">
+                <h4> Please go to verify your email to see all the workshops. </h4>
+            </div>
+        </div>
+    {% endif %}
+
     </div>
 {% endblock %}

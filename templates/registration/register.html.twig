@@ -34,6 +34,9 @@
 
 {% block body %}
 
+    {% block language_profile %}
+    {% endblock %}
+    
     {{ form_start(registrationForm, {
         attr: { class : 'form-signin' }
     }) }}

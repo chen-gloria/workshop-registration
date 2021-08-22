@@ -20,7 +20,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_instructor_login';
+    public const ADMIN_LOGIN_ROUTE = 'admin_login';
+    public const INSTRUCTOR_LOGIN_ROUTE = 'instructor_login';
 
     private UrlGeneratorInterface $urlGenerator;
 
@@ -55,6 +56,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     protected function getLoginUrl(Request $request): string
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        if ($request->getRequestUri() === '/admin/login') {
+            return $this->urlGenerator->generate(self::ADMIN_LOGIN_ROUTE);
+        } else if ($request->getRequestUri() === '/instructor/login')
+            return $this->urlGenerator->generate(self::INSTRUCTOR_LOGIN_ROUTE);
     }
 }
