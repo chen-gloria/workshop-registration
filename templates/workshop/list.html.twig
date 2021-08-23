@@ -31,7 +31,7 @@
                     </p>
                     <p class="mb-1">
                         <span class="text-nowrap mb-2 d-inline-block">
-                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            <span class="mdi mdi-comment-multiple-outline text-muted"></span>
                             {{ workshop.capacity }}
                         </span>
                         <br>
@@ -60,7 +60,14 @@
                         <a href="#" class="d-inline-block text-muted fw-bold ms-2">
                             +7 more
                         </a>
-                        <button type="button" class="d-inline-block btn btn-primary float-right" style="width: 50%;">Enroll</button>
+                        {# <a href="{{ path('admin_article_new') }}" class="btn btn-primary pull-right">
+                            Create <span class="fa fa-plus-circle"></span>
+                        </a> #}
+                        {% for role in app.user.roles %}
+                            {% if role == 'ROLE_INSTRUCTOR' %}
+                            <button type="submit" class="d-inline-block btn btn-primary float-right" style="width: 50%;">Enroll</button>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

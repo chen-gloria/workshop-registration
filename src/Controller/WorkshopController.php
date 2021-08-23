@@ -29,7 +29,7 @@ class WorkshopController extends AbstractController
     }
 
     /**
-     * @Route("/workshop/{slug}/enroll")
+     * @Route("/workshop/{slug}/enroll", name="instructor_workshop_enroll")
      */
     public function enrollWorkshop($slug)
     {
