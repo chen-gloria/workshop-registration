@@ -1,9 +1,77 @@
-{% extends 'base.html.twig' %}
+    <div class="row">
 
-{% block language_profile %}
-{% endblock %}
+    {% if app.user.email is defined %}
+        {% for workshop in workshops %}
+        <div class="col-lg-6 col-xxl-3">
+            <div class="card d-block">
+                {% for role in app.user.roles %}
+                    {% if role == 'ROLE_ADMIN' %}
+                    <div class="dropdown card-widgets">
+                        <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="dripicons-dots-3">∙∙∙</i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" style="">
+                            <!-- item-->
+                            <a href="#" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                            <!-- item-->
+                            <a href="#" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a>
+                            <!-- item-->
+                            <a href="#" class="dropdown-item"><i class="mdi mdi-email-outline me-1"></i>Invite</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
 
-{% block leftside_bar %}
-{% endblock %}
+                <div class="card-body">
+                    <img class="card-img mb-2" src="{{ asset(workshop.programImageFilename) }}" style="width: 100px; height: 40px;" alt="project image cap">
+                    <h4 class="mt-0"> <a href="#" class="text-title">{{ workshop.name }}</a></h4>
+                    <div class="badge bg-success mb-3">Finished</div>
+                    <p class="text-muted font-13 mb-3">
+                        With supporting text below as a natural lead-in to additional contenposuere erat a ante...<a href="#" class="fw-bold text-muted">view more</a>
+                    </p>
+                    <p class="mb-1">
+                        <span class="text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            {{ workshop.capacity }}
+                        </span>
+                        <br>
+                        <span class="text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            {{ workshop.location }}
+                        </span>
+                        <br>
+                        <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-format-list-bulleted-type text-muted"></i>
+                            {{ workshop.startsAt|date('Y-m-d H:i') }}
+                        </span>
+                        <br>
+                        <span class="text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            {{ workshop.endsAt|date('Y-m-d H:i') }}
+                        </span>
+                    </p>
+                    <div id="tooltip-container">
+                        <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
+                            <img src="{{ asset('images/profile/alien.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                        </a>
+                        <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
+                            <img src="{{ asset('images/profile/astronaut.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                        </a>
+                        <a href="#" class="d-inline-block text-muted fw-bold ms-2">
+                            +7 more
+                        </a>
+                        <button type="button" class="d-inline-block btn btn-primary float-right" style="width: 50%;">Enroll</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="container">
+            <div class="col-lg-12 col-xxl-12">
+                <h4> Please go to verify your email to see all the workshops. </h4>
+            </div>
+        </div>
+    {% endif %}
 
-{% block content_block %}{% endblock %}
+    </div>

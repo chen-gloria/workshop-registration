@@ -15,11 +15,7 @@ class WorkshopController extends AbstractController
      */
     public function homepage(WorkshopRepository $workshopRepository)
     {
-        $workshops = $workshopRepository->findAll();
-        
-        return $this->render('workshop/list.html.twig', [
-            'workshops' => $workshops,
-        ]);
+        return $this->render('homepage.html.twig');
     }
 
     /**
