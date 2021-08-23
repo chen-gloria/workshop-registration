@@ -14,7 +14,7 @@
     
     <form class="form-signin" method="post">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger">{{ error.messageKey }}</div>
         {% endif %}
 
         <h1 class="h3 mb-3 font-weight-normal">Sign in as an Instructor</h1>

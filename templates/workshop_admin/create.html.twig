@@ -4,15 +4,17 @@
 
 {% block login_register %}{% endblock %}
 
-{% block content_block %}        
-        {{ include('_pagetitle.html.twig', {
-            breadcrumb_primary: 'Hyper',
-            breadcrumb_second: 'Workshops',
-            breadcrumb_active: 'Create Workshop',
-            page_title: 'Create Workshop'
-        })}}
+{% block page_title %}     
+    {{ include('_pagetitle.html.twig', {
+        breadcrumb_primary: 'Hyper',
+        breadcrumb_second: 'Workshops',
+        breadcrumb_active: 'Create Workshop',
+        page_title: 'Create Workshop'
+    })}}
+{% endblock %}
 
-        {{ include('workshop_admin/_createform.html.twig', {
-            button_text: 'Create'
-        })}}
+{% block form_content %}
+    {{ include('workshop_admin/_createform.html.twig', {
+        button_text: 'Create'
+    })}}
 {% endblock %}
