@@ -20,7 +20,20 @@
     </div>
 
     <div class="row mb-2">
+    
+    {% if app.user.roles is defined %}
+        {% for role in app.user.roles %}
+        {% if role == 'ROLE_ADMIN' %}
+        <div class="col-sm-4">
+            <a href="{{ path('admin_workshop_create') }}" class="btn btn-danger btn-rounded mb-3"><i class="mdi mdi-plus"></i> Create Workshop</a>
+        </div>
+        <div class="col-sm-8">
+        {% else %}
         <div class="col-sm-12">
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
                     <button type="button" class="btn btn-primary">All</button>
@@ -40,10 +53,31 @@
     </div>
 
     <div class="row">
+
     {% if app.user.email is defined %}
+
         {% for workshop in workshops %}
         <div class="col-lg-6 col-xxl-3">
             <div class="card d-block">
+
+                {% for role in app.user.roles %}
+                    {% if role == 'ROLE_ADMIN' %}
+                    <div class="dropdown card-widgets">
+                        <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="dripicons-dots-3">∙∙∙</i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" style="">
+                            <!-- item-->
+                            <a href="#" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                            <!-- item-->
+                            <a href="#" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a>
+                            <!-- item-->
+                            <a href="#" class="dropdown-item"><i class="mdi mdi-email-outline me-1"></i>Invite</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
                 <div class="card-body">
                     <img class="card-img mb-2" src="{{ asset(workshop.programImageFilename) }}" style="width: 100px; height: 40px;" alt="project image cap">
                     <h4 class="mt-0"> <a href="#" class="text-title">{{ workshop.name }}</a></h4>
