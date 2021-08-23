@@ -22,7 +22,7 @@ class WorkshopFormType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('program', ChoiceType::class, [
+            ->add('program', ProgramChoiceType::class, [
                 'placeholder' => 'Choose a program',
                 'choices' => [
                     'Body Attack' => 'bodyattack',
@@ -36,7 +36,7 @@ class WorkshopFormType extends AbstractType
                     'The Trip' => 'the_trip'
                 ],
             ])
-            ->add('overview')
+            // ->add('overview')
             ->add('location')
             ->add('startsAt')
             ->add('endsAt')

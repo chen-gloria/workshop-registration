@@ -11,7 +11,7 @@ class WorkshopFixture extends BaseFixture implements DependentFixtureInterface
 {
     public function loadData(ObjectManager $manager)
     {
-        $this->createMany(30, 'workshops', function($count) use ($manager) {
+        $this->createMany(10, 'workshops', function($count) use ($manager) {
             $workshop = new Workshop();
             $workshop->setName($this->faker->realText($maxNbChars = 25));
             $workshop->setLocation($this->faker->streetName);

@@ -20,12 +20,13 @@ class WorkshopAdminController extends AbstractController
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $form = $this->createForm(WorkshopFormType::class);
-
+        
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Workshop $workshop */
             $workshop = $form->getData();
+
             $entityManager->persist($workshop);
             $entityManager->flush();
 
