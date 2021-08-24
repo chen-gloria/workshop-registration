@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Workshop;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -47,19 +48,19 @@ class WorkshopRepository extends ServiceEntityRepository
     /**
      * @return Workshop[] Returns an array of Workshop objects
      */
-    /*
-    public function findByExampleField($value)
+
+    public function findUsersRegisteredByWorkshopId($workshopId)
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->addIsSetDateQueryBuilder()
+            ->leftJoin('w.users', 'u')
+            ->andWhere('w.id = :workshopId')
+            ->setParameter('workshopId', $workshopId)
+            ->addSelect('u')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Workshop

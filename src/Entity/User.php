@@ -59,11 +59,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $agreeTermsAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Workshop::class, inversedBy="users")
+     */
+    private $workshops;
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
+        $this->workshops = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -206,6 +211,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function agreeTerms()
     {
         $this->agreeTermsAt = new \DateTime();
+    }
+
+    /**
+     * @return Collection|Workshop[]
+     */
+    public function getWorkshops(): Collection
+    {
+        return $this->workshops;
+    }
+
+    public function addWorkshop(Workshop $workshop): self
+    {
+        if (!$this->workshops->contains($workshop)) {
+            $this->workshops[] = $workshop;
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshop(Workshop $workshop): self
+    {
+        $this->workshops->removeElement($workshop);
+
+        return $this;
     }
 
 }

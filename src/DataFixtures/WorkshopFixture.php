@@ -15,9 +15,11 @@ class WorkshopFixture extends BaseFixture implements DependentFixtureInterface
             $workshop = new Workshop();
             $workshop->setName($this->faker->realText($maxNbChars = 25));
             $workshop->setLocation($this->faker->streetName);
-            $workshop->setStartsAt($this->faker->dateTimeBetween('now', '+3 months'));
+            $workshop->setStartsAt($this->faker->dateTimeBetween('-3 months', '+3 months'));
             $workshop->setEndsAt($this->faker->dateTimeBetween($workshop->getStartsAt(), '+3 months'));
             $workshop->setCapacity($this->faker->numberBetween(10, 100));
+            $workshop->setStatusCode();
+            $workshop->setCurrentRegistered($this->faker->numberBetween(0, $workshop->getCapacity()));
 
             $workshop->setProgram($this->getRandomReference('programs'));
 

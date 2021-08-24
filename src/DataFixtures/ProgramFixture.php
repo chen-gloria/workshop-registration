@@ -7,7 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ProgramFixture extends BaseFixture implements DependentFixtureInterface
+class ProgramFixture extends BaseFixture
 {
     private static $programNames = [
         'bodyattack',
@@ -41,20 +41,20 @@ class ProgramFixture extends BaseFixture implements DependentFixtureInterface
             $program->setImageFilename(self::$programImages[$count]);
 
             // Get the number of Instructors
-            $instructors = $this->getRandomReferences('instructors', $this->faker->numberBetween(0, 10));
-            foreach ($instructors as $instructor) {
-                $program->addInstructor($instructor);
-            }
+            // $instructors = $this->getRandomReferences('instructors', $this->faker->numberBetween(0, 10));
+            // foreach ($instructors as $instructor) {
+            //     $program->addInstructor($instructor);
+            // }
 
             return $program;
         });
         $manager->flush();
     }
 
-    public function getDependencies()
-    {
-        return [
-            InstructorFixture::class,
-        ];
-    }
+    // public function getDependencies()
+    // {
+    //     return [
+    //         InstructorFixture::class,
+    //     ];
+    // }
 }

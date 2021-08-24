@@ -3316,8 +3316,8 @@ textarea.form-control.is-invalid {
 .btn.disabled,
 .btn:disabled,
 fieldset:disabled .btn {
-    pointer-events: none;
-    opacity: .65
+    pointer-events: all;
+    opacity: .85
 }
 
 .btn-primary {
@@ -3411,7 +3411,11 @@ fieldset:disabled .btn {
 .btn-secondary:disabled {
     color: #fff;
     background-color: #6c757d;
-    border-color: #6c757d
+    border-color: #6c757d;
+}
+
+.btn-secondary.disabled {
+    pointer-events: none;
 }
 
 .btn-success {

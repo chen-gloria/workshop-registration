@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WorkshopRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,26 @@ class Workshop
      * @ORM\JoinColumn(nullable=false)
      */
     private $program;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $statusCode;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
+     */
+    private $currentRegistered;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="workshops")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,5 +150,88 @@ class Workshop
     public function getProgramImageFilename()
     {
         return 'images/programs/'.$this->program->getImageFilename();
+    }
+
+    public function getStatusCode(): ?int
+    {
+        $this->workshopStatusCode();
+
+        return $this->statusCode;
+    }
+
+    public function setStatusCode(int $statusCode = null): self
+    {
+        $this->workshopStatusCode();
+
+        return $this;
+    }
+
+    public function workshopStatusCode()
+    {
+        $now = new \DateTime();
+
+        if ($now >= $this->getStartsAt() && $now <= $this->getEndsAt()) {
+            $this->statusCode = 0; // Ongoing event
+        } else if ($now > $this->getEndsAt()) {
+            $this->statusCode = -1; // Past event
+        } else if ($now < $this->getStartsAt()) {
+            $this->statusCode = 1; // Future event
+        }
+    }
+
+    public function getCurrentRegistered(): ?int
+    {
+        return $this->currentRegistered;
+    }
+
+    public function setCurrentRegistered(int $currentRegistered): self
+    {
+        $this->currentRegistered = $currentRegistered;
+
+        return $this;
+    }
+
+    public function getRemainingCapacity(): ?int
+    {
+        return $this->capacity - $this->currentRegistered;
+    }
+
+    public function getCapacityPercentage()
+    {
+        return round($this->currentRegistered / $this->capacity * 100);
+    }
+
+    public function addCurrentRegistered()
+    {
+        $this->currentRegistered++;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeWorkshop($this);
+        }
+
+        return $this;
     }
 }

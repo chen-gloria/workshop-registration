@@ -27,6 +27,8 @@ class WorkshopAdminController extends AbstractController
             /** @var Workshop $workshop */
             $workshop = $form->getData();
 
+            $workshop->setStatusCode();
+
             $entityManager->persist($workshop);
             $entityManager->flush();
 

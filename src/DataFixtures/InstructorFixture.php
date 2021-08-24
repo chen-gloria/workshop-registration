@@ -5,10 +5,11 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
-class InstructorFixture extends BaseFixture
+class InstructorFixture extends BaseFixture implements DependentFixtureInterface
 {
     private $passwordHasher;
 
@@ -31,9 +32,22 @@ class InstructorFixture extends BaseFixture
                 'lesmills'
             ));
 
+            // Get the number of Instructors
+            $workshops = $this->getRandomReferences('workshops', $this->faker->numberBetween(0, 5));
+            foreach ($workshops as $workshop) {
+                $instructor->addWorkshop($workshop);
+            }
+
             return $instructor;
         });
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            WorkshopFixture::class,
+        ];
     }
 }
