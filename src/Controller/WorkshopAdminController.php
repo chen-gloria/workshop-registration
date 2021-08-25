@@ -59,9 +59,7 @@ class WorkshopAdminController extends AbstractController
 
             $this->addFlash('success', 'This workshop has been updated!');
 
-            return $this->redirectToRoute('admin_workshop_edit', [
-                'id' => $workshop->getId(),
-            ]);
+            return $this->redirectToRoute('app_account');
         }
 
         return $this->render('workshop_admin/edit.html.twig', [
