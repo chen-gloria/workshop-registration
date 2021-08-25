@@ -26,16 +26,6 @@ class WorkshopController extends AbstractController
     }
 
     /**
-     * @Route("/workshop/{slug}", name="workshop_show")
-     */
-    public function show($slug)
-    {
-        return $this->render('workshop/show.html.twig', [
-            'slug' => $slug,
-        ]);
-    }
-
-    /**
      * @Route("/workshop/{id}/register", name="instructor_workshop_register", methods="POST")
      */
     public function workshopRegister(UserRepository $userRepository, WorkshopRepository $workshopRepository, 
