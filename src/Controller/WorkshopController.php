@@ -53,7 +53,7 @@ class WorkshopController extends AbstractController
 
             $mailer->send($email);
 
-            $this->addFlash('success', 'You have successfully registered this workshop!');
+            $this->addFlash('success', 'You have successfully registered this workshop! Please check your email for the workshop ticket!');
         } else {
             $this->addFlash('success', 'You have already registered this workshop, you can\'t register again!');
         }
