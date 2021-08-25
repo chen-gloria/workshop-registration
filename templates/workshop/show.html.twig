@@ -9,6 +9,7 @@
         breadcrumb_primary: 'Hyper',
         breadcrumb_second: 'Workshops',
         breadcrumb_active: 'Workshop Details',
+        secondary_path: 'app_account',
         page_title: 'Workshop Details'
     })}}
 {% endblock %}
@@ -17,8 +18,8 @@
 {% block content_block %}
     <div class="row">
         <div class="col-xxl-8 col-lg-6">
-        {{ include('workshop/_workshop_info.html.twig')}}
-        {{ include('workshop/_workshop_comments.html.twig')}}
+            {{ include('workshop/_workshop_info.html.twig')}}
+            {{ include('workshop/_workshop_comments.html.twig')}}
         </div>
 
         <div class="col-xxl-4 col-lg-6">
