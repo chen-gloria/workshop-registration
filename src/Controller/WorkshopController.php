@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use App\Entity\Workshop;
+use Symfony\Component\Mailer\MailerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request as Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\WorkshopRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Email;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class WorkshopController extends AbstractController
@@ -36,7 +39,7 @@ class WorkshopController extends AbstractController
      * @Route("/workshop/{id}/register", name="instructor_workshop_register", methods="POST")
      */
     public function workshopRegister(UserRepository $userRepository, WorkshopRepository $workshopRepository, Workshop $workshop, 
-                                    Request $request, EntityManagerInterface $entityManager)
+                                    Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer)
     {
         $userEmail = $request->getSession()->get('_security.last_username');
         $user = $userRepository->findOneBy(['email' => $userEmail]);
@@ -48,7 +51,17 @@ class WorkshopController extends AbstractController
             $workshop->addCurrentRegistered();
             $entityManager->flush();
 
-            // Send an email to the User
+            $email = (new TemplatedEmail())
+                ->from('ask@lesmills.com.au')
+                ->to($userEmail)
+                ->subject('Workshop Registration Invoice ∙ Les Mills Asia Pacific')
+                ->htmlTemplate('workshop/workshop_register_email.html.twig')
+                ->context([
+                    'workshop' => $workshop,
+                    'user' => $user
+                ]);
+
+            $mailer->send($email);
 
             // Change the button 
             $this->addFlash('success', 'You have successfully registered this workshop!');
