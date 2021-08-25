@@ -11,11 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class WorkshopAdminController extends AbstractController
 {
     /**
      * @Route("/admin/workshop/create", name="admin_workshop_create")
-     * @IsGranted("ROLE_ADMIN")
      */
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -51,10 +53,15 @@ class WorkshopAdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/workshops", name="admin_workshop_list")
+     * @Route("/admin/workshop/{id}/remove", name="admin_workshop_remove", methods="POST")
      */
-    public function list(): Response
+    public function remove(EntityManagerInterface $entityManager, Workshop $workshop): Response
     {
-        return $this->render('workshop_admin/list.html.twig');
+        $entityManager->remove($workshop);
+        $entityManager->flush();
+        
+        $this->addFlash('success', 'This workshop has been removed!');
+
+        return $this->redirectToRoute('app_account');
     }
 }

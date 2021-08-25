@@ -38,8 +38,8 @@ class WorkshopController extends AbstractController
     /**
      * @Route("/workshop/{id}/register", name="instructor_workshop_register", methods="POST")
      */
-    public function workshopRegister(UserRepository $userRepository, WorkshopRepository $workshopRepository, Workshop $workshop, 
-                                    Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer)
+    public function workshopRegister(UserRepository $userRepository, WorkshopRepository $workshopRepository, 
+                                    Workshop $workshop, Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer)
     {
         $userEmail = $request->getSession()->get('_security.last_username');
         $user = $userRepository->findOneBy(['email' => $userEmail]);
