@@ -81,14 +81,12 @@
                                 +{{ workshop.currentRegistered - 2 }} more
                             </a>
 
-                            {# <div id="tooltip-container"> #}
                             {% for role in app.user.roles %}
                                 {% if role == 'ROLE_INSTRUCTOR' %}
                                     {% if workshop.statusCode == 1 and workshop.remainingCapacity > 0 %}
-                                        <button type="submit" class="d-inline-block btn btn-success float-right" style="width: 50%;">Register</button>
+                                        <a href="{{ path('workshop_detail', {'id': workshop.id }) }}" class="d-inline-block btn btn-success float-right" style="width: 50%;">Register</a>
                                     {% elseif workshop.statusCode == 1 and workshop.remainingCapacity <= 0 %}
                                         <button type="button" class="d-inline-block btn btn-danger float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Booked out</button>
-
                                     {% elseif  workshop.statusCode == 0 %}
                                         <button type="button" class="d-inline-block btn btn-primary float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Ongoing</button>
                                     {% elseif  workshop.statusCode == -1 %}
@@ -96,7 +94,6 @@
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
-                            {# </div> #}
                         </p>
                     </form>
                 </div>

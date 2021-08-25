@@ -16,13 +16,8 @@
         {% endblock %}
     </head>
 
-    <body class="show" data-layout="detached" 
-                       data-layout-config="{leftSidebarCondensed:false, darkMode:false, showRightSidebarOnStart: true}" 
-                       style="visibility: visible;" 
-                       data-new-gr-c-s-check-loaded="14.1026.0" 
-                       data-gr-ext-installed=""
-                       >
-                       
+    <body class="show" data-layout="detached" data-layout-config="{leftSidebarCondensed:false, darkMode:false, showRightSidebarOnStart: true}" style="visibility: visible;" data-new-gr-c-s-check-loaded="14.1026.0" data-gr-ext-installed="">
+
         <div class="navbar-custom topnav-navbar topnav-navbar-dark">
             <div class="container-fluid">
                 <a class="topnav-logo" href="{{ path('app_homepage') }}">
@@ -135,19 +130,19 @@
         {% endfor %}
 
         {% block body %}
-        <div class="container-fluid">
-        
-            <div class="wrapper menuitem-active">
-                {% block leftside_bar %}
-                    {{ include('_leftside_bar.html.twig')}}
-                {% endblock %}
+            <div class="container-fluid">
+            
+                <div class="wrapper menuitem-active">
+                    {% block leftside_bar %}
+                        {{ include('_leftside_bar.html.twig')}}
+                    {% endblock %}
 
-                <div class="content-page">
-                    {% block content_block %}
+                    <div class="content-page">
                         <div class="content">
                             {% block page_title %}
                             {% endblock %}
 
+                            {% block content_block %}
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
@@ -157,16 +152,16 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endblock %}
                         </div>
-                    {% endblock %}
 
-                    {% block footer %}
+                        {% block footer %}
                         <footer class="footer"></footer>
-                    {% endblock %}
-
+                        {% endblock %}
+                    </div>
                 </div>
-            </dov>
-        </div>
+                
+            </div>
         {% endblock %}
 
         {% block javascripts %}
@@ -175,6 +170,8 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
             <script src="{{ asset('js/app.min.js') }}"></script>
             <script src="{{ asset('js/vendor.min.js') }}"></script>
+            <script src="{{ asset('js/project-detail.js') }}"></script>
+            <script src="{{ asset('js/Chart.bundle.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>

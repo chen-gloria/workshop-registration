@@ -38,43 +38,21 @@ class WorkshopController extends AbstractController
     public function workshopRegister(UserRepository $userRepository, WorkshopRepository $workshopRepository, Workshop $workshop, 
                                     Request $request, EntityManagerInterface $entityManager)
     {
-        /**
-         * Find all users registered under this workshop (using $workshopId).
-         * @return Workshop[] Returns a Workshop object
-         */
-        $workshop_users = $workshopRepository->findUsersRegisteredByWorkshopId($workshop->getId())[0];
-
-        /**
-         * @return User[] Returns an array of User objects
-         */
-        $users = $workshop_users->getUsers()->getValues();
-
-        /**
-         * Get currently logged in User email, then find the current user
-         * @return User[] Returns current User object
-         */ 
+        dd("I'm checked");
         $userEmail = $request->getSession()->get('_security.last_username');
         $user = $userRepository->findOneBy(['email' => $userEmail]);
 
-        /**
-         * Check if users array contains the current user.
-         */
-        
-        if (!in_array($user, $users)) {
+        $user_workshop = $workshopRepository->findWorkshopRegistered($user->getId(), $workshop->getId());
 
-            /** 
-             * Add workshop to the user by saving the user_id 
-             * and workshop_id to the database table: 'user_workshop' 
-             */
+        if (!$user_workshop) {
             $user->addWorkshop($workshop);
-            /** 
-             * Add current_registered by 1
-             */
             $workshop->addCurrentRegistered();
             $entityManager->flush();
 
-            $this->addFlash('success', 'You have successfully registered this workshop!');
+            // Send an email to the User
 
+            // Change the button 
+            $this->addFlash('success', 'You have successfully registered this workshop!');
         } else {
             $this->addFlash('success', 'You have already registered this workshop, you can\'t register again!');
         }
@@ -83,11 +61,11 @@ class WorkshopController extends AbstractController
     }
 
     /**
-     * @Route("/workshops")
+     * @Route("/workshop/{id}/detail", name="workshop_detail")
      */
-    public function list(): Response
+    public function register(): Response
     {
-        return $this->render('workshop/list.html.twig');
+        return $this->render('workshop/show.html.twig');
     }
 
 }

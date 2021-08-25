@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Workshop;
+use Doctrine\ORM\Query\Parameter;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -48,14 +50,14 @@ class WorkshopRepository extends ServiceEntityRepository
     /**
      * @return Workshop[] Returns an array of Workshop objects
      */
-
-    public function findUsersRegisteredByWorkshopId($workshopId)
+    public function findWorkshopRegistered($userId, $workshopId)
     {
-        return $this->addIsSetDateQueryBuilder()
-            ->leftJoin('w.users', 'u')
+        return $this->getOrCreateQueryBuilder()
+            ->innerJoin('w.users', 'u')
+            ->andWhere('u.id = :userId')
             ->andWhere('w.id = :workshopId')
+            ->setParameter('userId', $userId)
             ->setParameter('workshopId', $workshopId)
-            ->addSelect('u')
             ->getQuery()
             ->getResult()
         ;

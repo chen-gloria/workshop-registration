@@ -2,6 +2,29 @@
 
 {% block title %}Hello WorkshopController!{% endblock %}
 
-{% block body %}
-<h1> Here is the detail of the {{ slug }} workshop </h1>
+{% block login_register %}{% endblock %}
+
+{% block page_title %}
+    {{ include('_pagetitle.html.twig', {
+        breadcrumb_primary: 'Hyper',
+        breadcrumb_second: 'Workshops',
+        breadcrumb_active: 'Workshop Details',
+        page_title: 'Workshop Details'
+    })}}
 {% endblock %}
+
+    
+{% block content_block %}
+    <div class="row">
+        <div class="col-xxl-8 col-lg-6">
+        {{ include('workshop/_workshop_info.html.twig')}}
+        {{ include('workshop/_workshop_comments.html.twig')}}
+        </div>
+
+        <div class="col-xxl-4 col-lg-6">
+            {# {{ include('workshop/_workshop_progress.html.twig') }} #}
+            {{ include('workshop/_workshop_attachments.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
