@@ -47,9 +47,26 @@ class WorkshopAdminController extends AbstractController
     /**
      * @Route("/admin/workshop/{id}/edit", name="admin_workshop_edit")
      */
-    public function edit(): Response
+    public function edit(EntityManagerInterface $entityManager, Request $request, Workshop $workshop): Response
     {
-        return $this->render('workshop_admin/edit.html.twig');
+        $form = $this->createForm(WorkshopFormType::class, $workshop);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($workshop);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'This workshop has been updated!');
+
+            return $this->redirectToRoute('admin_workshop_edit', [
+                'id' => $workshop->getId(),
+            ]);
+        }
+
+        return $this->render('workshop_admin/edit.html.twig', [
+            'workshopForm' => $form->createView(),
+        ]);
     }
 
     /**

@@ -1,8 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}Update a Workshop{% endblock %}
 
-{% block body %}
-There will be a form of <h1>editing</h1>.
+{% block login_register %}{% endblock %}
 
+{% block page_title %}     
+    {{ include('_pagetitle.html.twig', {
+        breadcrumb_primary: 'Hyper',
+        breadcrumb_second: 'Workshops',
+        breadcrumb_active: 'Edit Workshop',
+        page_title: 'Edit Workshop'
+    })}}
+{% endblock %}
+
+{% block form_content %}
+    {{ include('workshop_admin/_createform.html.twig', {
+        button_text: 'Update'
+    })}}
 {% endblock %}

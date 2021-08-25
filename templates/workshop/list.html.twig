@@ -12,7 +12,9 @@
                                     <i class="dripicons-dots-3"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <button class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</button>
+                                    <form action="{{ path('admin_workshop_edit', { id: workshop.id }) }}" method="POST">
+                                        <button class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</button>
+                                    </form>
                                     <form action="{{ path('admin_workshop_remove', { id: workshop.id }) }}" method="POST">
                                         <button class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</button>
                                     </form>
