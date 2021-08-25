@@ -38,7 +38,6 @@ class WorkshopController extends AbstractController
     public function workshopRegister(UserRepository $userRepository, WorkshopRepository $workshopRepository, Workshop $workshop, 
                                     Request $request, EntityManagerInterface $entityManager)
     {
-        dd("I'm checked");
         $userEmail = $request->getSession()->get('_security.last_username');
         $user = $userRepository->findOneBy(['email' => $userEmail]);
 
@@ -57,15 +56,17 @@ class WorkshopController extends AbstractController
             $this->addFlash('success', 'You have already registered this workshop, you can\'t register again!');
         }
 
-        return $this->redirectToRoute('app_account');
+        return $this->redirectToRoute('workshop_detail', ['id' => $workshop->getId()]);
     }
 
     /**
      * @Route("/workshop/{id}/detail", name="workshop_detail")
      */
-    public function register(): Response
+    public function register(Workshop $workshop): Response
     {
-        return $this->render('workshop/show.html.twig');
+        return $this->render('workshop/show.html.twig', [
+            'workshop' => $workshop
+        ]);
     }
 
 }

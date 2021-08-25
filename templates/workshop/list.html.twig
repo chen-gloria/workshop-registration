@@ -57,45 +57,43 @@
                     </span>
 
                     {# Progress Tooltip #}
-                    <form action="{{ path('instructor_workshop_register', { id: workshop.id }) }}" method="POST">
-                        <p class="mb-1">
-                            <span class="text-nowrap mb-2 d-inline-block">
-                                <p class="mb-2 fw-bold">
-                                    <i class="mdi mdi-account-group text-muted"></i>
-                                    <strong> {{ workshop.capacity }} </strong> Vacancies
-                                    <span class="float-end text-dark">{{ workshop.capacityPercentage }}% sold out</span>
-                                </p>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ workshop.capacityPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ workshop.capacityPercentage }}%;"></div>
-                                </div>
-                            </span>
-                            <br>
+                    <p class="mb-1">
+                        <span class="text-nowrap mb-2 d-inline-block">
+                            <p class="mb-2 fw-bold">
+                                <i class="mdi mdi-account-group text-muted"></i>
+                                <strong> {{ workshop.capacity }} </strong> Vacancies
+                                <span class="float-end text-dark">{{ workshop.capacityPercentage }}% sold out</span>
+                            </p>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ workshop.capacityPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ workshop.capacityPercentage }}%;"></div>
+                            </div>
+                        </span>
+                        <br>
 
-                            <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                <img src="{{ asset('images/profile/alien.png') }}" class="rounded-circle avatar-xs" alt="friend">
-                            </a>
-                            <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                <img src="{{ asset('images/profile/astronaut.png') }}" class="rounded-circle avatar-xs" alt="friend">
-                            </a>
-                            <a href="#" class="d-inline-block text-dark fw-bold ms-2">
-                                +{{ workshop.currentRegistered - 2 }} more
-                            </a>
+                        <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
+                            <img src="{{ asset('images/profile/alien.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                        </a>
+                        <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
+                            <img src="{{ asset('images/profile/astronaut.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                        </a>
+                        <a href="#" class="d-inline-block text-dark fw-bold ms-2">
+                            +{{ workshop.currentRegistered - 2 }} more
+                        </a>
 
-                            {% for role in app.user.roles %}
-                                {% if role == 'ROLE_INSTRUCTOR' %}
-                                    {% if workshop.statusCode == 1 and workshop.remainingCapacity > 0 %}
-                                        <a href="{{ path('workshop_detail', {'id': workshop.id }) }}" class="d-inline-block btn btn-success float-right" style="width: 50%;">Register</a>
-                                    {% elseif workshop.statusCode == 1 and workshop.remainingCapacity <= 0 %}
-                                        <button type="button" class="d-inline-block btn btn-danger float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Booked out</button>
-                                    {% elseif  workshop.statusCode == 0 %}
-                                        <button type="button" class="d-inline-block btn btn-primary float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Ongoing</button>
-                                    {% elseif  workshop.statusCode == -1 %}
-                                        <button type="button" class="d-inline-block btn btn-secondary float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Finished</button>
-                                    {% endif %}
+                        {% for role in app.user.roles %}
+                            {% if role == 'ROLE_INSTRUCTOR' %}
+                                {% if workshop.statusCode == 1 and workshop.remainingCapacity > 0 %}
+                                    <a href="{{ path('workshop_detail', {'id': workshop.id }) }}" class="d-inline-block btn btn-success float-right" style="width: 50%;">Register</a>
+                                {% elseif workshop.statusCode == 1 and workshop.remainingCapacity <= 0 %}
+                                    <button type="button" class="d-inline-block btn btn-danger float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Booked out</button>
+                                {% elseif  workshop.statusCode == 0 %}
+                                    <button type="button" class="d-inline-block btn btn-primary float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Ongoing</button>
+                                {% elseif  workshop.statusCode == -1 %}
+                                    <button type="button" class="d-inline-block btn btn-secondary float-right" style="width: 50%; cursor: not-allowed;" disabled="disabled">Finished</button>
                                 {% endif %}
-                            {% endfor %}
-                        </p>
-                    </form>
+                            {% endif %}
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
         </div>
