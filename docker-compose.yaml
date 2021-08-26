@@ -1,35 +1,50 @@
-version: '3.8'
+version: '3.7'
 services:
-    mysql:
-        hostname: mysql
-        image: mariadb:10.5
-        environment:
-            - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_DATABASE=workshop_register
-            - MYSQL_USER=main
-            - MYSQL_PASSWORD=password
-        volumes:
-            - mysql-data:/var/lib/mysql:rw
+    mysql8:
+        image: mysql:8
+        container_name: mysql8-workshop-register
         ports:
-            - 3307:3306
+            - '3308:3306'
+        volumes:
+            - mysql-data:/var/lib/mysql
+        command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        restart: always # always restart unless stopped manually
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_PASSWORD: password
+            MYSQL_DATABASE: workshop_register
         networks:
-            - workshop-registration-network
-
-    workshop-registration:
-        hostname: workshop-registration
-        # working_dir: /var/www/workshop-registration
+            - nginx-php74-mysql8
+    php74:
         build:
             context: .
             dockerfile: Dockerfile
-        volumes:
-            - ./.env:/var/www/workshop-registration/.env:rw
+        container_name: php74-workshop-register
         ports:
-            - 8070:80
+            - "9001:9000"
+        volumes:
+            - app-data:/var/www/workshop-register
         networks:
-            - workshop-registration-network
+            - nginx-php74-mysql8
+    
+    nginx-service:
+        image: nginx:stable-alpine
+        container_name: nginx-workshop-register
+        ports:
+            - "8070:80"
+        volumes:
+            - app-data:/var/www/workshop-register
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - php74
+            - mysql8
+        networks:
+            - nginx-php74-mysql8
+
+
+networks:
+    nginx-php74-mysql8:
 
 volumes:
     mysql-data:
-
-networks:
-    workshop-registration-network:
+    app-data:
