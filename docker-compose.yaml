@@ -1,14 +1,35 @@
-version: '3.7'
+version: '3.8'
 services:
-    database:
-        image: 'mysql:latest'
+    mysql:
+        hostname: mysql
+        image: mariadb:10.5
         environment:
-            MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: main
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=workshop_register
+            - MYSQL_USER=main
+            - MYSQL_PASSWORD=password
+        volumes:
+            - mysql-data:/var/lib/mysql:rw
         ports:
-            # To allow the host machine to access the ports below, modify the lines below.
-            # For example, to allow the host to connect to port 3306 on the container, you would change
-            # "3306" to "3306:3306". Where the first port is exposed to the host and the second is the container port.
-            # See https://docs.docker.com/compose/compose-file/#ports for more information.
-            - '3307:3306'
-    
+            - 3307:3306
+        networks:
+            - workshop-registration-network
+
+    workshop-registration:
+        hostname: workshop-registration
+        # working_dir: /var/www/workshop-registration
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./.env:/var/www/workshop-registration/.env:rw
+        ports:
+            - 8070:80
+        networks:
+            - workshop-registration-network
+
+volumes:
+    mysql-data:
+
+networks:
+    workshop-registration-network:

@@ -32,12 +32,12 @@ class InstructorFixture extends BaseFixture implements DependentFixtureInterface
                 'lesmills'
             ));
 
-            // Get the number of Instructors
             $workshops = $this->getRandomReferences('workshops', $this->faker->numberBetween(0, 5));
             foreach ($workshops as $workshop) {
                 $instructor->addWorkshop($workshop);
             }
 
+            // return an instructor
             return $instructor;
         });
 

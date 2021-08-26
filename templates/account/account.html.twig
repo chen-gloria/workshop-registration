@@ -14,33 +14,33 @@
     <div class="row mb-2">
         {% if app.user.roles is defined %}
             {% for role in app.user.roles %}
-            {% if role == 'ROLE_ADMIN' %}
-            <div class="col-sm-4">
-                <a href="{{ path('admin_workshop_create') }}" class="btn btn-danger btn-rounded mb-3"><i class="mdi mdi-plus"></i> Create Workshop</a>
-            </div>
-            <div class="col-sm-8">
-            {% else %}
-            <div class="col-sm-12">
-            {% endif %}
+                {% if role == 'ROLE_ADMIN' %}
+                    <div class="col-sm-4">
+                        <a href="{{ path('admin_workshop_create') }}" class="btn btn-danger btn-rounded mb-3"><i class="mdi mdi-plus"></i> Create Workshop</a>
+                    </div>
+                    <div class="col-sm-8">
+                {% else %}
+                    <div class="col-sm-12">
+                {% endif %}
             {% endfor %}
         {% endif %}
 
-                <div class="text-sm-end">
-                    <div class="btn-group mb-3">
-                        <button type="button" class="btn btn-primary">All</button>
-                    </div>
-                    <div class="btn-group mb-3 ms-1">
-                        <button type="button" class="btn btn-light">Ongoing</button>
-                        <button type="button" class="btn btn-light">Finished</button>
-                    </div>
-                    <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
-                        <button type="button" class="btn btn-secondary"><i class="dripicons-view-apps"></i></button>
-                    </div>
-                    <div class="btn-group mb-3 d-none d-sm-inline-block">
-                        <button type="button" class="btn btn-link text-muted"><i class="dripicons-checklist"></i></button>
-                    </div>
+            <div class="text-sm-end">
+                <div class="btn-group mb-3">
+                    <button type="button" class="btn btn-primary">All</button>
+                </div>
+                <div class="btn-group mb-3 ms-1">
+                    <button type="button" class="btn btn-light">Ongoing</button>
+                    <button type="button" class="btn btn-light">Finished</button>
+                </div>
+                <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
+                    <button type="button" class="btn btn-secondary"><i class="dripicons-view-apps"></i></button>
+                </div>
+                <div class="btn-group mb-3 d-none d-sm-inline-block">
+                    <button type="button" class="btn btn-link text-muted"><i class="dripicons-checklist"></i></button>
                 </div>
             </div>
+        </div>
     </div>
 
     {{ include('workshop/list.html.twig')}}
