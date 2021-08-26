@@ -23,7 +23,7 @@ services:
         ports:
             - "9001:9000"
         volumes:
-            - app-data:/var/www/workshop-register
+            - ./symfony:/var/www/workshop-register
         networks:
             - nginx-php74-mysql8
     
@@ -33,7 +33,7 @@ services:
         ports:
             - "8070:80"
         volumes:
-            - app-data:/var/www/workshop-register
+            - ./symfony:/var/www/workshop-register
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
         depends_on:
             - php74
@@ -47,4 +47,3 @@ networks:
 
 volumes:
     mysql-data:
-    app-data:
