@@ -33,7 +33,7 @@
                 {{ message }}
             </div>
         {% endfor %}
-        
+
         {% block main_content %}
             <div class="container-fluid">
                 <div class="wrapper menuitem-active">
@@ -55,6 +55,7 @@
 
                             {% block page_title %}{% endblock %}
 
+                            {# Usually rewrite this one unless it is a form #}
                             {% block content_block %}
                                 <div class="row">
                                     <div class="col-12">

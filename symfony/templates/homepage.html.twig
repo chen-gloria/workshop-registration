@@ -1,27 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block content_block %}
-
-    {% block page_title %}
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_INSTRUCTOR') %}
-            {{ include('_page_title.html.twig', {
-                breadcrumb_primary: 'Hyper',
-                breadcrumb_second: 'Workshops',
-                breadcrumb_active: 'Workshop List',
-                page_title: 'Workshops'
-            })}}
-        {% else %}
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box">
-                        <div class="page-title-right">
-                        </div>
-                        <h4 class="page-title"></h4>
+{% block page_title %}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_INSTRUCTOR') %}
+        {{ include('_page_title.html.twig', {
+            breadcrumb_primary: 'Hyper',
+            breadcrumb_second: 'Workshops',
+            breadcrumb_active: 'Workshop List',
+            page_title: 'Workshops'
+        })}}
+    {% else %}
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
                     </div>
+                    <h4 class="page-title"></h4>
                 </div>
             </div>
-        {% endif %}
-    {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content_block %}
 
     {% block workshop_toolkit %}
         <div class="row mb-2">
