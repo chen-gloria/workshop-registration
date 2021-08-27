@@ -1,0 +1,67 @@
+{{ form_start(workshopForm) }}
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="mb-3">
+                {{ form_row(workshopForm.name, {
+                    label: 'Name',
+                    attr: { 'placeholder': 'Enter workshop name' }
+                })}}
+            </div>
+
+            <div class="mb-3">
+                {{ form_row(workshopForm.program, {
+                    label: 'Program',
+                    attr: { 
+                        'class': 'form-control select2' 
+                    }
+                })}}
+            </div>
+
+            <div class="mb-3">
+                {{ form_row(workshopForm.location, {
+                    label: 'Location',
+                    attr: { 'placeholder': 'Enter workshop location' }
+                })}}
+                {# <label for="workshop-location" class="form-label">Location</label>
+                <input type="text" id="workshop-location" class="form-control" placeholder="Enter workshop location"> #}
+            </div>
+
+            <!-- Start Date View -->
+            <div class="mb-3 position-relative" id="datepicker1">
+                {{ form_row(workshopForm.startsAt, {
+                    label: 'Start Date',
+                    attr: { 'placeholder': 'Pick a start date' }
+                })}}
+                {# <label class="form-label">Start Date</label>
+                <input type="text" class="form-control" data-provide="datepicker" data-date-container="#datepicker1" data-date-format="d-M-yyyy" data-date-autoclose="true"> #}
+            </div>
+
+            <!-- End Date View -->
+            <div class="mb-3 position-relative" id="datepicker2">
+                {{ form_row(workshopForm.endsAt, {
+                    label: 'End Date',
+                    attr: { 'placeholder': 'Pick a end date' }
+                })}}
+                {# <label class="form-label">End Date</label>
+                <input type="text" class="form-control" data-provide="datepicker" data-date-container="#datepicker2" data-date-format="d-M-yyyy" data-date-autoclose="true"> #}
+            </div>
+
+            <div class="mb-3">
+                {{ form_row(workshopForm.capacity, {
+                    label: 'Capacity',
+                    attr: { 'placeholder': 'Enter workshop capacity' }
+                })}}
+                {# <label for="workshop-capacity" class="form-label">Capacity</label> #}
+            </div>
+        </div>
+
+        {{ include('workshop_admin/_create_edit_file.html.twig')}}
+
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 text-center">
+            <button type="submit" class="btn btn-primary" style="width: 50%;">{{ button_text }}</button>
+        </div>
+    </div>
+{{ form_end(workshopForm) }}
