@@ -41,6 +41,15 @@ services:
         networks:
             - nginx-php74-mysql8
 
+    mailcatcher:
+        image: schickling/mailcatcher:latest
+        container_name: mailcatcher-workshop-register
+        hostname: mailcatcher
+        ports:
+            - "1026:1025"
+            - "1081:1080"
+        networks:
+            - nginx-php74-mysql8
 
 networks:
     nginx-php74-mysql8:
