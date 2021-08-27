@@ -35,9 +35,9 @@
                     {% block sidebar_left %}
                         {% if is_granted('ROLE_ADMIN' or is_granted('ROLE_INSTRUCTOR')) %}
                             {% if app.user.username is defined %}
-                                {{ include('sidebar_left.html.twig', { 'username': app.user.username }) }}
+                                {{ include('navbar/sidebar_left.html.twig', { 'username': app.user.username }) }}
                             {% else %}
-                                {{ include('sidebar_left.html.twig', { 'username': '' }) }}
+                                {{ include('navbar/sidebar_left.html.twig', { 'username': '' }) }}
                             {% endif %}
                         {% endif %}
                     {% endblock %}
@@ -63,9 +63,7 @@
 
                         </div>
 
-                        {% block footer %}
-                            {{ include('footer.html.twig')}}
-                        {% endblock %}
+                        {% block footer_innerpage %}{% endblock %}
 
                     </div>
                 
@@ -73,6 +71,11 @@
                 </div>
             </div>
         {% endblock %}
+
+        {% block footer_homepage %}
+            {{ include('footer_homepage.html.twig')}}
+        {% endblock %}
+
 
         {# Messages #}
         {% for message in app.flashes('success') %}
@@ -85,7 +88,7 @@
         {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
             <div class="alert alert-warning" style="margin-bottom: 0;">
                 You are currently switched to this user.
-                <a href="{{ path('app_home', {
+                <a href="{{ path('homepage', {
                     '_switch_user': '_exit'
                 }) }}">Exit Impersonation</a>
             </div>

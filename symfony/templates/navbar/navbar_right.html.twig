@@ -5,10 +5,9 @@
             {% block profile %}{{ include('navbar/profile.html.twig')}}{% endblock %}
         </ul>
     {% endblock %}
-{% endif %}
+{% else %}
 
-
-{% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_INSTRUCTOR')  %}
+{# {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_INSTRUCTOR')  %} #}
     {% block login_register %}
         <ul class="list-unstyled topbar-menu float-end mb-0">
             {{ include('navbar/login_register.html.twig')}}

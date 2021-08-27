@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_home")
+     * @Route("/", name="homepage")
      */
     public function homepage(WorkshopRepository $workshopRepository)
     {
         $workshops = $workshopRepository->findAll();
 
-        return $this->render('account/account.html.twig', [
+        return $this->render('homepage.html.twig', [
             'workshops' => $workshops,
         ]);
     }

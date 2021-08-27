@@ -36,7 +36,7 @@ class WorkshopAdminController extends AbstractController
 
             $this->addFlash('success', 'This workshop has been created!');
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('workshop_admin/create.html.twig', [
@@ -59,7 +59,7 @@ class WorkshopAdminController extends AbstractController
 
             $this->addFlash('success', 'This workshop has been updated!');
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('workshop_admin/edit.html.twig', [
@@ -77,6 +77,6 @@ class WorkshopAdminController extends AbstractController
         
         $this->addFlash('success', 'This workshop has been removed!');
 
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('homepage');
     }
 }

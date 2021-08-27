@@ -1,0 +1,93 @@
+{% for workshop in workshops %}
+    <div class="col-lg-6 col-xl-4 col-xxl-3">
+        <div class="card d-block">
+            <div class="card-body">
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    {{ include('workshop/_admin_secondary_btns.html.twig')}}
+                {% endif %}
+
+                {% block main_workshop_content %}
+                    <img class="card-img mb-2" src="{{ asset(workshop.programImageFilename) }}" style="width: 100px; height: 40px;" alt="project image cap">
+                    <h4 class="mt-0"> 
+                        <a href="{{ path('workshop_detail', { id:workshop.id }) }}" class="text-title">{{ workshop.name }}</a>
+                    </h4>
+                    <div class="badge bg-success mb-3">Finished</div>
+                
+                    <p class="text-muted font-13 mb-3">
+                        With supporting text below as a natural lead-in to additional contenposuere erat a ante...
+                        <a href="#" class="fw-bold text-muted">view more</a>
+                    </p>
+
+                    <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                        <i class="uil-location-pin-alt text-muted"></i>
+                        {{ workshop.location }}
+                    </span>
+
+                    <span class="text-nowrap mb-2 d-inline-block">
+                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                        Online Live Stream
+                    </span>
+                
+                    <br>
+
+                    <span class="pe-2 text-nowrap mb-2 d-inline-block text-primary">
+                        <i class="mdi mdi-calendar-start text-muted"></i>
+                        <strong> {{ workshop.startsAt|date('Y-m-d H:i') }} </strong>
+                    </span>
+
+                    <br>
+
+                    <span class="text-nowrap mb-2 d-inline-block">
+                        <i class="mdi mdi-calendar-end text-muted"></i>
+                        <strong> {{ workshop.endsAt|date('Y-m-d H:i') }} </strong>
+                    </span>
+
+                    <br>
+
+                    <span> 
+                        <i class="uil-pricetag-alt text-muted"></i>
+                        <strong> Free </strong>
+                    </span>
+
+                    <p class="mb-1 proggress-toolbox">
+
+                        <span class="workshop-capacity-status text-nowrap mb-2 d-inline-block">
+                            <div class="mb-2 fw-bold">
+                                <i class="mdi mdi-account-group text-muted"></i>
+                                <strong> {{ workshop.capacity }} </strong> Vacancies
+
+                                <span class="float-end text-dark">{{ workshop.capacityPercentage }}% sold out</span>
+                            </div>
+
+                            <div class="progress progress-sm">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ workshop.capacityPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ workshop.capacityPercentage }}%;"></div>
+                            </div>
+                        </span>
+
+                        <br>
+
+                        <div class="workshop-participants">
+                            <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
+                                <img src="{{ asset('images/profile/alien.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                            </a>
+                            <a href="#" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
+                                <img src="{{ asset('images/profile/astronaut.png') }}" class="rounded-circle avatar-xs" alt="friend">
+                            </a>
+
+                            <a href="#" class="d-inline-block text-dark fw-bold ms-2">
+                                +{{ workshop.currentRegistered - 2 }} more
+                            </a>
+                        </div>
+
+                        {% if is_granted('ROLE_INSTRUCTOR') %}
+                            {{ include('workshop/_instructor_control.html.twig')}}
+                        {% endif %}
+                    </p>
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+{% endfor %}
+

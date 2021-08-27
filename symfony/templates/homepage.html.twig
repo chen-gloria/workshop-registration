@@ -1,44 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block sidebar_left %}
-{% endblock %}
-
 {% block content_block %}
-    {{ include('_pagetitle.html.twig', {
-        breadcrumb_primary: 'Hyper',
-        breadcrumb_second: 'Workshops',
-        breadcrumb_active: 'Workshop List',
-        page_title: 'Workshops'
-    })}}
 
-    <div class="row mb-2">
-        {% if is_granted('ROLE_ADMIN')%}
-        <div class="col-sm-4">
-            <a href="{{ path('admin_workshop_create') }}" class="btn btn-danger btn-rounded mb-3"><i class="mdi mdi-plus"></i> Create Workshop</a>
-        </div>
-        <div class="col-sm-8">
+    {% block page_title %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_INSTRUCTOR') %}
+            {{ include('_page_title.html.twig', {
+                breadcrumb_primary: 'Hyper',
+                breadcrumb_second: 'Workshops',
+                breadcrumb_active: 'Workshop List',
+                page_title: 'Workshops'
+            })}}
         {% else %}
-        
-        <div class="col-sm-12">
-        {% endif %}
-            <div class="text-sm-end">
-                <div class="btn-group mb-3">
-                    <button type="button" class="btn btn-primary">All</button>
-                </div>
-                <div class="btn-group mb-3 ms-1">
-                    <button type="button" class="btn btn-light">Ongoing</button>
-                    <button type="button" class="btn btn-light">Finished</button>
-                </div>
-                <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
-                    <button type="button" class="btn btn-secondary"><i class="dripicons-view-apps"></i></button>
-                </div>
-                <div class="btn-group mb-3 d-none d-sm-inline-block">
-                    <button type="button" class="btn btn-link text-muted"><i class="dripicons-checklist"></i></button>
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                        </div>
+                        <h4 class="page-title"></h4>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        {% endif %}
+    {% endblock %}
 
-    {{ include('workshop/list.html.twig')}}
+    {% block workshop_toolkit %}
+        <div class="row mb-2">
+            {% if is_granted('ROLE_ADMIN')%}
+                {{ include('_admin_primary_btns.html.twig')}}
+            {% endif %}
+
+            {{ include('_workshop_filter.html.twig')}}
+        </div>
+    {% endblock %}
+
+    {% block workshop_list %}
+        <div class="row">
+            {{ include('workshop_list.html.twig')}}
+        </div>
+    {% endblock %}
     
 {% endblock %}
