@@ -27,7 +27,7 @@
             </div>
         {% endblock %}
 
-        {# Messages #}
+        {# Messages - must be under top_navbar #}
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ message }}
@@ -39,7 +39,7 @@
                 <div class="wrapper menuitem-active">
 
                     {% block sidebar_left %}
-                        {% if is_granted('ROLE_ADMIN' or is_granted('ROLE_INSTRUCTOR')) %}
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_INSTRUCTOR') %}
                             {% if app.user.username is defined %}
                                 {{ include('navbar/sidebar_left.html.twig', { 'username': app.user.username }) }}
                             {% else %}
@@ -74,16 +74,21 @@
 
                         </div>
 
-                        {% block footer_innerpage %}{% endblock %}
+                        {% block footer_innerpage %}
+                            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_INSTRUCTOR') %}
+                                {{ include('footer.html.twig')}}
+                            {% endif %}
+                        {% endblock %}
 
                     </div>
-                
                 </div>
             </div>
         {% endblock %}
 
         {% block footer_homepage %}
-            {{ include('footer_homepage.html.twig')}}
+            {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_INSTRUCTOR')  %}
+                {{ include('footer.html.twig')}}
+            {% endif %}
         {% endblock %}
 
         {# Impersonation #}

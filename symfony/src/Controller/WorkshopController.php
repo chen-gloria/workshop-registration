@@ -37,7 +37,7 @@ class WorkshopController extends AbstractController
                 ->from('ask@lesmills.com.au')
                 ->to($userEmail)
                 ->subject('Workshop Registration Invoice ∙ Les Mills Asia Pacific')
-                ->htmlTemplate('workshop/workshop_register_email.html.twig')
+                ->htmlTemplate('email/workshop_register_email.html.twig')
                 ->context([
                     'workshop' => $workshop,
                     'user' => $user
