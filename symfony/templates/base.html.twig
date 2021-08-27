@@ -27,6 +27,13 @@
             </div>
         {% endblock %}
 
+        {# Messages #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
         {% block main_content %}
             <div class="container-fluid">
                 <div class="wrapper menuitem-active">
@@ -76,14 +83,6 @@
         {% block footer_homepage %}
             {{ include('footer_homepage.html.twig')}}
         {% endblock %}
-
-
-        {# Messages #}
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
 
         {# Impersonation #}
         {% if is_granted('ROLE_PREVIOUS_ADMIN') %}

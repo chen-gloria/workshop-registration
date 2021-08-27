@@ -59,14 +59,15 @@ class RegistrationController extends AbstractController
                     ->from(new Address('gloria@lesmills.com.au', 'Les Mills Workshop Registry Portal')) // need .env settings
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email ∙ Les Mills Workshop Registration')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('email/registration_confirm_email.html.twig')
             );
 
-            
+            $this->addFlash('success', 'You have been successfully registered! Please check your email to verify your account.');
+
             return $this->redirectToRoute('instructor_login');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('security/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
@@ -78,10 +79,12 @@ class RegistrationController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        // validate email confirmation link, sets User::isVerified=true and persists
         try {
+
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+
         } catch (VerifyEmailExceptionInterface $exception) {
+
             $this->addFlash('verify_email_error', $exception->getReason());
 
             return $this->redirectToRoute('instructor_login');
