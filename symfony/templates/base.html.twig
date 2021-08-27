@@ -14,7 +14,7 @@
             <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
             <link rel="stylesheet" href="{{ asset('css/app-modern.min.css') }}" type="text/css" id="light-style">
         {% endblock %}
-        
+
     </head>
 
     <body class="show" data-layout="detached" data-layout-config="{leftSidebarCondensed:false, darkMode:false, showRightSidebarOnStart: true}" style="visibility: visible;" data-new-gr-c-s-check-loaded="14.1026.0" data-gr-ext-installed="">
@@ -22,8 +22,8 @@
         {% block top_navbar %}
             <div class="navbar-custom topnav-navbar topnav-navbar-dark">
                 <div class="container-fluid">
-                    {{ include('navbar/top_navbar_left.html.twig')}}
-                    {{ include('navbar/top_navbar_right.html.twig')}}
+                    {{ include('navbar/navbar_left.html.twig')}}
+                    {{ include('navbar/navbar_right.html.twig')}}
                 </div>
             </div>
         {% endblock %}
@@ -32,12 +32,12 @@
             <div class="container-fluid">
                 <div class="wrapper menuitem-active">
 
-                    {% block left_sidebar %}
+                    {% block sidebar_left %}
                         {% if is_granted('ROLE_ADMIN' or is_granted('ROLE_INSTRUCTOR')) %}
                             {% if app.user.username is defined %}
-                                {{ include('left_sidebar.html.twig', { 'username': app.user.username }) }}
+                                {{ include('sidebar_left.html.twig', { 'username': app.user.username }) }}
                             {% else %}
-                                {{ include('left_sidebar.html.twig', { 'username': '' }) }}
+                                {{ include('sidebar_left.html.twig', { 'username': '' }) }}
                             {% endif %}
                         {% endif %}
                     {% endblock %}
