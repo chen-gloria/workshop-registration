@@ -18,14 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class WorkshopController extends AbstractController
 {
     /**
-     * @Route("/", name="app_homepage")
-     */
-    public function homepage(WorkshopRepository $workshopRepository)
-    {
-        return $this->render('homepage.html.twig');
-    }
-
-    /**
      * @Route("/workshop/{id}/register", name="instructor_workshop_register", methods="POST")
      */
     public function workshopRegister(UserRepository $userRepository, WorkshopRepository $workshopRepository, 
