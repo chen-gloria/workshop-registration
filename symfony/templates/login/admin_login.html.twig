@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sign in to Les Mills Workshop Register ∙ Les Mills Asia Pacific{% endblock %}
+{% block title %}Admin log in to the Les Mills Workshop Register ∙ Les Mills Asia Pacific{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -8,32 +8,31 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 {% endblock %}
 
-{% block main_content %}
-    {% block navbar_toolkit %}
-    {% endblock %}
-    
+{% block form_content %}
+
     <form class="form-signin" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey }}</div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Sign in as an Admin</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Log in as an Admin</h1>
+
+
         <label for="inputEmail" class="sr-only">Username or email address</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Username or Email address" required autofocus>
+        
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+            <label> <input type="checkbox" name="_remember_me"> Remember me </label>
         </div>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">
             Sign in
         </button>
     </form>
+
 {% endblock %}
