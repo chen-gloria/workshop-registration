@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class WorkshopAdminController extends AbstractController
 {
+
     /**
      * @Route("/admin/workshop/create", name="admin_workshop_create")
      */
@@ -78,5 +79,16 @@ class WorkshopAdminController extends AbstractController
         $this->addFlash('success', 'This workshop has been removed!');
 
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/admin/impersonate", name="admin_workshop_impersonate")
+     */
+    public function impersonate(Request $request)
+    {
+        $instructor_email = $request->request->get('instructor_email');
+
+        return $this->redirect('../?_switch_user='.$instructor_email);
+
     }
 }

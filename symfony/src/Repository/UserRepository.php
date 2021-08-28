@@ -19,6 +19,19 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+
+    /**
+     * @return User[]
+     */
+    public function findAllMatching(string $query, int $limit = 10)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.email LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

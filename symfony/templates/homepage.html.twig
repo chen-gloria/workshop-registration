@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/algolia-autocomplete.css') }}">
+{% endblock %}
+
 {% block page_title %}
     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_INSTRUCTOR') %}
         {{ include('_page_title.html.twig', {
@@ -39,4 +45,11 @@
         </div>
     {% endblock %}
     
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+    <script src="{{ asset('js/algolia-autocomplete.js') }}"></script>
 {% endblock %}

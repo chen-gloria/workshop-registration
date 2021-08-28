@@ -1,6 +1,14 @@
 <div class="col-sm-4">
-    <a href="{{ path('admin_workshop_create') }}" class="btn btn-danger btn-rounded mb-3">
+    <a href="{{ path('admin_workshop_create') }}" class="btn btn-danger btn-rounded mb-3 mr-3">
         <i class="mdi mdi-plus"></i> 
         Create Workshop
     </a>
+
+    <button class="btn btn-primary btn-rounded mb-3" data-bs-toggle="modal" data-bs-target="#standard-modal"> 
+        <i class="mdi mdi-account-multiple"></i> 
+        Impersonation
+    </button>
+
+    {{ include('workshop_admin/_admin_impersonate_modal.html.twig')}}
+
 </div>

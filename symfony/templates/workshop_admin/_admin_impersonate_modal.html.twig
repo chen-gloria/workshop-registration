@@ -1,0 +1,23 @@
+
+<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="standard-modalLabel">Modal Heading</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <form action="{{ path('admin_workshop_impersonate') }}" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="instructor_email" class="col-form-label">Type instructor email or username:</label>
+                        <input type="text" name="instructor_email" class="form-control js-user-autocomplete" data-autocomplete-url="{{ path('admin_utility_users')}}" id="instructor_email">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Impersonate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
